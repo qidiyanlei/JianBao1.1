@@ -34,6 +34,6 @@ dependencies {
     compile files('libs/glide-3.7.0.jar')
     compile files('libs/SwitchLayout1.0.jar')
     compile project(':slidingMenuLib')
-    compile 'com.squareup.okhttp3:okhttp:3.4.2'
-    compile files('libs/okhttputils-2_6_2.jar')
+    compile files('libs/okhttp-3.4.1.jar')
+    compile files('libs/okio-1.9.0.jar')
 }
