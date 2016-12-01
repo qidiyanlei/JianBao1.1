@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <wz.utils.Img_SuoFang
+    <bgs.com.jianbao11.utils.Img_SuoFangUtils
         android:id="@+id/mSCImg"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
