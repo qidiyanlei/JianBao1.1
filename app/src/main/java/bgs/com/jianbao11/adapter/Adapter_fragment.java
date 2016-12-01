@@ -10,18 +10,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import bgs.com.jianbao11.R;
-import bgs.com.jianbao11.bean.Info_Bean;
+import bgs.com.jianbao11.bean.Info_shouyel;
 import bgs.com.jianbao11.jianbao.MyAppalication;
 import bgs.com.jianbao11.utils.ImageLoader;
 
-import static bgs.com.jianbao11.R.id.fragment_price;
-
 
 public class Adapter_fragment extends BaseAdapter {
-	private List<Info_Bean> list;
+	private List<Info_shouyel> list;
 	private Context context;
 	private ImageLoader imageLoader;
-	public Adapter_fragment(List<Info_Bean> list, Context context) {
+	public Adapter_fragment(List<Info_shouyel> list, Context context) {
 		super();
 		this.list = list;
 		this.context = context;
@@ -38,7 +36,7 @@ public class Adapter_fragment extends BaseAdapter {
 		return list.get(position);
 	}
 
-	public void refrush(List<Info_Bean> list){
+	public void refrush(List<Info_shouyel> list){
 		this.list=list;
 		notifyDataSetChanged();
 	}
@@ -50,34 +48,33 @@ public class Adapter_fragment extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder vHolder;
-		if (convertView==null) {
+		if (convertView==null){
 			vHolder=new ViewHolder();
-			convertView=View.inflate(context, R.layout.adapter_fragment, null);
-			vHolder.fragment_icon=(ImageView) convertView.findViewById(R.id.fragment_icon);
-			vHolder.fragment_title=(TextView) convertView.findViewById(R.id.fragment_title);
-			vHolder.fragment_id= (TextView) convertView.findViewById(R.id.fragment_id);
-			vHolder.fragment_price= (TextView) convertView.findViewById(fragment_price);
-			vHolder.fragment_issue_time= (TextView) convertView.findViewById(R.id.fragment_issue_time);
-			vHolder.fragment_fianl_time= (TextView) convertView.findViewById(R.id.fragment_final_time);
-			vHolder.fragment_follow= (TextView) convertView.findViewById(R.id.fragment_follow);
-			convertView.setTag(vHolder);
+			convertView=View.inflate(context, R.layout.adapter_fragment_1,null);
+			vHolder.Ltag= (ImageView) convertView.findViewById(R.id.Ltag);
+			vHolder.Limg= (ImageView) convertView.findViewById(R.id.Limg);
+			vHolder.user_icon= (ImageView) convertView.findViewById(R.id.user_icon);
+			vHolder.Ltitle= (TextView) convertView.findViewById(R.id.Ltitle);
+			vHolder.Lprice= (TextView) convertView.findViewById(R.id.Lprice);
 		}else{
-			vHolder=(ViewHolder) convertView.getTag();
+			vHolder= (ViewHolder) convertView.getTag();
 		}
-		
-		vHolder.fragment_title.setText(list.get(position).getTitle());
-		vHolder.fragment_id.setText(list.get(position).getId());
-		vHolder.fragment_price.setText(list.get(position).getPrice());
-		vHolder.fragment_fianl_time.setText(list.get(position).getFinal_time());
-		vHolder.fragment_issue_time.setText(list.get(position).getIssue_time());
-		vHolder.fragment_follow.setText(list.get(position).getFollow());
-		imageLoader.Load(list.get(position).getPicture_str(), vHolder.fragment_icon, context);
+		imageLoader.LoadR(list.get(position).getUser_icon_url(),vHolder.user_icon,context);
+		imageLoader.Load(list.get(position).getLimg_url(),vHolder.Limg,context);
+		vHolder.Ltitle.setText(list.get(position).getLtitle());
+		vHolder.Lprice.setText(list.get(position).getLprice());
+		if (list.get(position).getTag()==0){
+			vHolder.Ltag.setImageResource(R.drawable.normal);
+		}else if (list.get(position).getTag()==1){
+			vHolder.Ltag.setImageResource(R.drawable.sold);
+		}else if (list.get(position).getTag()==2){
+			vHolder.Ltag.setImageResource(R.drawable.out);
+		}
 		return convertView;
 	}
 	private class ViewHolder{
-		private ImageView fragment_icon;
-		private TextView fragment_title,fragment_id,
-				fragment_price,fragment_issue_time,fragment_fianl_time,fragment_follow;
+		private ImageView user_icon,Limg,Ltag;
+		private TextView Ltitle,Lprice;
 	}
 	
 }

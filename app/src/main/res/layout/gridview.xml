@@ -7,32 +7,47 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
+            android:layout_marginRight="8dp"
             android:id="@+id/mGrid_img"
             android:layout_width="180dp"
             android:layout_height="250dp"
             android:src="@mipmap/ic_launcher"
             />
         <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/mGrid_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="物品的title"
             android:textSize="18sp"/>
-        <LinearLayout
+        <RelativeLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="28dp"
+            >
             <TextView
+                android:id="@+id/mD"
+                android:layout_alignParentBottom="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="价格:"/>
+                android:textColor="#CD2626"
+                android:text="￥"/>
             <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/mD"
                 android:id="@+id/mGrid_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="181"
                 android:textColor="#CD2626"
                 android:textSize="20sp"/>
-        </LinearLayout>
+            <ImageView
+                android:layout_alignParentBottom="true"
+                android:id="@+id/mGrid_tag"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/normal"/>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -111,17 +111,14 @@
                 <LinearLayout
                     android:layout_gravity="right"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="编号："/>
-                    <TextView
-                        android:id="@+id/Gid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="130"/>
+                    <ImageView
+                        android:id="@+id/Gtag"
+                        android:layout_gravity="bottom"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/normal"/>
                 </LinearLayout>
 
                 <TextView
@@ -289,6 +286,41 @@
                         android:textColor="#1C1C1C"
                         android:textSize="16sp"/>
                 </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#698B69"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="上架时间："/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2016.5.8"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="下架时间："/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2017.5.8"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

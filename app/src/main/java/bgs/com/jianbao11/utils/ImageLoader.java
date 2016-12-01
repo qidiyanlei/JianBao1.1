@@ -4,6 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -118,6 +123,69 @@ public class ImageLoader {
 		//׼���������ͼƬ
 		thread_pool.execute(new ImgThread(name));
 	}
+	public void LoadR(String name,ImageView img,Context ctx){
+		//Ϊ��ֱ������
+		if(name==null)
+			return;
+		if(img==null)
+			return;
+		this.ctx=ctx;
+		Bitmap bitmap;
+		//name ���й���
+		String name1=name.replace("/", "").replace(".", "").replace(":", "").replace("_", "");
+		//img.���tag
+		img.setTag(name1);//Ϊ�������ͼƬ��λ����ͼƬ���洢�������Ӧ�Ŀؼ��У������Ժ���жԱ�����
+		//��img��ӵ�set����
+		imgs.add(img);
+		//��lru�в���ͼƬ
+		bitmap=lru.get(name1);//K V-->��Lru�л�ȡͼƬ
+
+		if(bitmap!=null){
+			img.setImageBitmap(cutCircle(bitmap));
+			return;
+		}
+		//�ӱ���sd�л�ȡͼƬ
+		if(fileutils==null){
+			fileutils=new FileUtils(ctx);
+			bitmap=fileutils.getBitmap(name1);
+			if(bitmap!=null){
+				img.setImageBitmap(cutCircle(bitmap));
+				//��ͼƬ��ӵ�Lru��
+				lru.put(name1, bitmap);
+				return;
+			}
+		}
+		//����������
+		if(thread_pool==null){
+			thread_pool=Executors.newFixedThreadPool(MAX_POOLS);
+
+		}
+		//׼���������ͼƬ
+		thread_pool.execute(new ImgThread(name));
+	}
+	public Bitmap cutCircle(Bitmap bitmap){
+		//依据原有图片 复制一张新的图片作为画布背景 但格式发生了变化Config.ARGB_4444
+		Bitmap b=Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_4444);
+		//创建画布
+		Canvas canvas=new Canvas(b);
+		//设置画布的透明度和三原色
+		canvas.drawARGB(0, 0, 0, 0);
+		//创建画笔
+		Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
+		//画笔设置颜色
+		paint.setColor(Color.WHITE);
+		//取半径
+		float radius=Math.min(bitmap.getHeight(), bitmap.getWidth())/2;
+		//根据前边的两个参数来取到半径
+		canvas.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, radius, paint);
+		//重置画笔
+		paint.reset();
+		//调用截取图层的方法
+		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+		//画图片
+		canvas.drawBitmap(bitmap, 0, 0, paint);
+		return b;
+	}
 	//ͼƬ�첽�����ڲ���
 	private class ImgThread implements Runnable{
 		private String name;
@@ -138,11 +206,11 @@ public class ImageLoader {
 				String name1=name.replace("/", "").replace(".", "").replace(":", "").replace("_", "");
 				//������������ͼƬ�ٴ���ӵ�SD����lru��
 				if(bitmap!=null){
-					fileutils.SaveBitmap(name1, bitmap);
-					lru.put(name1, bitmap);
+					fileutils.SaveBitmap(name1, cutCircle(bitmap));
+					lru.put(name1, cutCircle(bitmap));
 					Message msg=hand.obtainMessage();
 					msg.what=200;
-					msg.obj=bitmap;
+					msg.obj=cutCircle(bitmap);
 					Bundle data=new Bundle();
 					data.putString("imgname", name1);
 					msg.setData(data);

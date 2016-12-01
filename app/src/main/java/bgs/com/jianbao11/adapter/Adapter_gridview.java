@@ -53,9 +53,17 @@ public class Adapter_gridview extends BaseAdapter {
             holder.mGrid_img= (ImageView) view.findViewById(R.id.mGrid_img);
             holder.mGrid_price= (TextView) view.findViewById(R.id.mGrid_price);
             holder.mGrid_title= (TextView) view.findViewById(R.id.mGrid_title);
+            holder.mGrid_tag= (ImageView) view.findViewById(R.id.mGrid_tag);
             view.setTag(holder);
         }else{
             holder= (ViewHolder) view.getTag();
+        }
+        if (list.get(i).getTag()==0){
+            holder.mGrid_tag.setImageResource(R.drawable.normal);
+        }else if (list.get(i).getTag()==1){
+            holder.mGrid_tag.setImageResource(R.drawable.sold);
+        }else if (list.get(i).getTag()==2){
+            holder.mGrid_tag.setImageResource(R.drawable.out);
         }
         imageLoader.Load(list.get(i).getImg_url(), holder.mGrid_img, context);
         holder.mGrid_title.setText(list.get(i).getTitle());
@@ -64,6 +72,6 @@ public class Adapter_gridview extends BaseAdapter {
     }
     private class ViewHolder{
         private TextView mGrid_price,mGrid_title;
-        private ImageView mGrid_img;
+        private ImageView mGrid_img,mGrid_tag;
     }
 }

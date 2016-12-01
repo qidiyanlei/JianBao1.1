@@ -34,7 +34,8 @@ public class Activity_GoodsDetail extends Activity implements ViewPager.OnPageCh
     private boolean autoChange=true;
     private boolean touchFlag=false;
     private ImageView mFrag_home_mImg1,mFrag_home_mImg2,mFrag_home_mImg3,mFrag_home_mImg4,Gshoucang_mimg;
-    private TextView Gid,Gtitle,Gprice,Gdescription,Gmobile,Gwechat,Gqq,Gmail;
+    private TextView Gtitle,Gprice,Gdescription,Gmobile,Gwechat,Gqq,Gmail;
+    private ImageView Gtag;
     private LinearLayout Gcollection,Gcall;
     private boolean isCollection=true;
     @Override
@@ -67,7 +68,7 @@ public class Activity_GoodsDetail extends Activity implements ViewPager.OnPageCh
         new ViewPagerScroller(this).initViewPagerScroll(viewPager);
         viewPager.setOnPageChangeListener(this);
 
-        Gid= (TextView) findViewById(R.id.Gid);
+        Gtag= (ImageView) findViewById(R.id.Gtag);
         Gtitle= (TextView) findViewById(R.id.Gtitle);
         Gprice= (TextView) findViewById(R.id.Gprice);
         Gdescription= (TextView) findViewById(R.id.Gdiscription);
