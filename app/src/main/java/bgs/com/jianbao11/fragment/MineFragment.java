@@ -16,7 +16,7 @@ import bgs.com.jianbao11.R;
 import bgs.com.jianbao11.activity.Activity_KeFu;
 import bgs.com.jianbao11.activity.Activity_XinXi;
 import bgs.com.jianbao11.activity.Activity_YiJian;
-import bgs.com.jianbao11.activity.Activity_LoginRegister;
+import bgs.com.jianbao11.activity.LoginActivity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -136,7 +136,7 @@ public class MineFragment extends Fragment {
                 startActivity(intent1);
                 break;
             case R.id.mImg_head:
-                Intent intent2 = new Intent(getActivity(), Activity_LoginRegister.class);
+                Intent intent2 = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent2);
                 break;
             case  R.id.mLin_info:

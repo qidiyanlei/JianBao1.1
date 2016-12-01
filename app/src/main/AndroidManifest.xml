@@ -20,13 +20,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@style/LoginTheme"
+            />
+        <activity android:name=".activity.SignupActivity"
+            android:theme="@style/LoginTheme"
+            />
         <activity android:name=".activity.Activity_XinXi"/>
         <activity android:name=".activity.Activity_PushGoods" />
-        <activity android:name=".activity.Activity_ZhuCe"/>
         <activity android:name=".activity.Activity_KeFu"/>
         <activity android:name=".activity.Activity_ForgetPassword"/>
         <activity android:name=".activity.Activity_YiJian"/>
-        <activity android:name=".activity.Activity_LoginRegister"/>
         <activity android:name=".activity.Activity_FirstStart"/>
         <activity android:name=".utils.SharedUtils">
             <intent-filter>
