@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="bgs.com.jianbao11">
-
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
@@ -28,6 +24,7 @@
         <activity android:name=".activity.Activity_YiJian"/>
         <activity android:name=".activity.Activity_LoginRegister"/>
         <activity android:name=".activity.Activity_FirstStart"/>
+
         <activity android:name=".utils.SharedUtils">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +36,9 @@
         <activity android:name=".activity.Activity_GoodsDetail"></activity>
         <activity android:name=".activity.Activity_Scal"
             android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <!-- 注册新活动 -->
+        <activity android:name="bgs.com.jianbao11.utils.ProcessActivity">
+        </activity>
     </application>
 
 </manifest>
