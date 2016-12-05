@@ -1,12 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+    aaptOptions.cruncherEnabled = false
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 18
+        minSdkVersion 16
+        targetSdkVersion 24
     }
 
     buildTypes {
@@ -17,6 +18,7 @@ android {
     }
 }
 
+
 dependencies {
-    compile 'com.android.support:support-v4:18.+'
+    compile 'com.android.support:support-fragment:24.2.1'
 }

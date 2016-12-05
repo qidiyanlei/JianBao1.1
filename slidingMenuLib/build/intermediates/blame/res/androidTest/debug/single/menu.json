@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\as\\gongzuokongjian\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\menu\\main.xml",
+        "source": "E:\\as\\gongzuokongjian\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\bundles\\debug\\res\\menu\\main.xml"
+    },
+    {
         "merged": "E:\\AndroidPR2\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\menu\\main.xml",
         "source": "E:\\AndroidPR2\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\bundles\\debug\\res\\menu\\main.xml"
     }

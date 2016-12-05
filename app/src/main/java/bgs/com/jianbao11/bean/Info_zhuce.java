@@ -8,7 +8,32 @@ import java.io.Serializable;
 
 public class Info_zhuce implements Serializable {
 
-    private String str_name,str_code,str_phone,str_password,str_QQ,str_wechat,str_email;
+    private String str_name;
+    private String str_code;
+    private String str_phone;
+    private String str_password;
+    private String str_QQ;
+    private String str_wechat;
+    private String str_email;
+
+    public String getStr_man() {
+        return str_man;
+    }
+
+    public void setStr_man(String str_man) {
+        this.str_man = str_man;
+    }
+
+    public String getStr_woman() {
+        return str_woman;
+    }
+
+    public void setStr_woman(String str_woman) {
+        this.str_woman = str_woman;
+    }
+
+    private String str_man;
+    private String str_woman;
 
     public String getStr_name() {
         return str_name;

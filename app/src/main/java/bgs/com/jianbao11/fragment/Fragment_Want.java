@@ -12,6 +12,7 @@ import bgs.com.jianbao11.R;
 
 /**
  * Created by 醇色 on 2016/11/25.
+ * 求购
  */
 
 public class Fragment_Want extends Fragment {
