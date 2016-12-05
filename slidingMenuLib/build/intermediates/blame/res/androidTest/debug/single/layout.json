@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\Androidstudio\\ProjectLocation\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "E:\\Androidstudio\\ProjectLocation\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+    },
+    {
         "merged": "E:\\AndroidPR2\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
         "source": "E:\\AndroidPR2\\JianBao1.1\\slidingMenuLib\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
     }

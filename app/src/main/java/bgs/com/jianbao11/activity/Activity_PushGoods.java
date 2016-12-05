@@ -32,6 +32,7 @@ import java.util.HashMap;
 
 import bgs.com.jianbao11.R;
 import bgs.com.jianbao11.utils.ProcessActivity;
+import bgs.com.jianbao11.utils.SharedUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -66,14 +67,11 @@ public class Activity_PushGoods extends Activity implements View.OnClickListener
     private int flagThread = 0;                    //线程循环标记变量 否则会上个线程没执行完就进行下面的
     private boolean flag = true;
     private boolean flag1 = true;
-    //获取图片上传URL路径 文件夹名+时间命名图片
-    //private String[] urlPicture;
+    private SharedUtils shared;
     //存储Bmp图像
     private ArrayList<HashMap<String, Object>> list;
     //适配器
     private SimpleAdapter simpleAdapter;
-    //插入PublishId通过Json解析
-    private String publishIdByJson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,7 +131,6 @@ public class Activity_PushGoods extends Activity implements View.OnClickListener
             @Override
             public boolean setViewValue(View view, Object data,
                                         String textRepresentation) {
-                // TODO Auto-generated method stub
                 if (view instanceof ImageView && data instanceof Bitmap) {
                     ImageView i = (ImageView) view;
                     i.setImageBitmap((Bitmap) data);
@@ -186,62 +183,66 @@ public class Activity_PushGoods extends Activity implements View.OnClickListener
 //                if (list.size() == 1) {
 //                    Toast.makeText(Activity_PushGoods.this, "没有图片需要上传", Toast.LENGTH_SHORT).show();
 //                }
-                if (title==null||"".equals(title)){
+                if (title == null || "".equals(title)) {
                     Toast.makeText(Activity_PushGoods.this, "没有标题", Toast.LENGTH_SHORT).show();
 
                 }
-                if (content==null||"".equals(content)){
+                if (content == null || "".equals(content)) {
                     Toast.makeText(Activity_PushGoods.this, "没有描述内容", Toast.LENGTH_SHORT).show();
                 }
-                if (price==null||"".equals(price)){
+                if (price == null || "".equals(price)) {
                     Toast.makeText(Activity_PushGoods.this, "没有输入价格", Toast.LENGTH_SHORT).show();
                 }
-                if (phone==null||"".equals(phone)){
+                if (phone == null || "".equals(phone)) {
                     Toast.makeText(Activity_PushGoods.this, "没有手机号", Toast.LENGTH_SHORT).show();
 
                 }
-                if (title!=null&&!"".equals(title)&&content!=null&&!"".equals(content)
-                        &&price!=null&&!"".equals(price)&&phone!=null&&!"".equals(phone)){
-                ok = new OkHttpClient();
-                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                //创建文件参数请求
-                for (int i = 1; i < list.size(); i++) {
-                    HashMap<String, Object> imgMap = list.get(i);
-                    String pathImage = (String) imgMap.get("pathImage");
-                    file = new File(pathImage);
-                    RequestBody fileBody = RequestBody.create(MEDIA_TYPE_PNG, file);
-                    builder.addFormDataPart("photo", file.getName(), fileBody);
-                }
-                builder.addFormDataPart("title", title);
-                builder.addFormDataPart("description",content );
-                builder.addFormDataPart("price", price);
-                builder.addFormDataPart("mobile", phone);
-                builder.addFormDataPart("qq",qq);
-                MultipartBody mBody = builder.build();
-                Request request = new Request.Builder().url(url).post(mBody).build();
-                ok.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.e("", "请求失败" + e.getLocalizedMessage());
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(Activity_PushGoods.this, "请求失败", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if (title != null && !"".equals(title) && content != null && !"".equals(content)
+                        && price != null && !"".equals(price) && phone != null && !"".equals(phone)) {
+                    ok = new OkHttpClient();
+                    MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                    //创建文件参数请求
+                    for (int i = 1; i < list.size(); i++) {
+                        HashMap<String, Object> imgMap = list.get(i);
+                        String pathImage = (String) imgMap.get("pathImage");
+                        file = new File(pathImage);
+                        RequestBody fileBody = RequestBody.create(MEDIA_TYPE_PNG, file);
+                        builder.addFormDataPart("photo", file.getName(), fileBody);
                     }
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        Log.e("", "请求成功" + response.body().string());
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(Activity_PushGoods.this, "请求成功", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        });
-                    }
-                });
+                    builder.addFormDataPart("title", title);
+                    builder.addFormDataPart("description", content);
+                    builder.addFormDataPart("price", price);
+                    builder.addFormDataPart("mobile", phone);
+                    builder.addFormDataPart("qq", qq);
+                    shared = new SharedUtils();
+                    String token = shared.getToken("token", this);
+                    builder.addFormDataPart("token", token);
+                    MultipartBody mBody = builder.build();
+                    Request request = new Request.Builder().url(url).post(mBody).build();
+                    ok.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("", "请求失败" + e.getLocalizedMessage());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Activity_PushGoods.this, "请求失败", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            Log.e("", "请求成功" + response.body().string());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Activity_PushGoods.this, "请求成功", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
+                        }
+                    });
                 }
                 break;
         }

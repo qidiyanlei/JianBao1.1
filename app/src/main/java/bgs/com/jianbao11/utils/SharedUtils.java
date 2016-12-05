@@ -53,5 +53,22 @@ public class SharedUtils extends Activity{
 		str = shared.getString(key, "");
 		return str;
 	}
-	
+
+	private String token="token";
+	public void saveToken(String key,String value,Context ctx){
+		SharedPreferences shared=ctx.getSharedPreferences(token,0);
+		Editor edit = shared.edit();
+		edit.putString(key, value);
+		edit.commit();
+	}
+
+	/*
+	 * 从本地获取数据
+	 * */
+	public String getToken(String key,Context ctx){
+		String str=null;
+		SharedPreferences shared = ctx.getSharedPreferences(token, 0);
+		str = shared.getString(key, "");
+		return str;
+	}
 }
