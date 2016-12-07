@@ -53,5 +53,11 @@ public class SharedUtils extends Activity{
 		str = shared.getString(key, "");
 		return str;
 	}
-	
+	/*
+	* 清除shared数据
+	* */
+	public void clearShared(Context ctx){
+		SharedPreferences shared = ctx.getSharedPreferences(name, 0);
+		shared.edit().clear().commit();
+	}
 }

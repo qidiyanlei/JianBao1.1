@@ -22,8 +22,8 @@ import bgs.com.jianbao11.activity.Activity_GoodsDetail;
 import bgs.com.jianbao11.adapter.Adapter_fragment;
 import bgs.com.jianbao11.adapter.Adapter_gridview;
 import bgs.com.jianbao11.bean.Info_Adver;
-import bgs.com.jianbao11.bean.Info_Bean;
 import bgs.com.jianbao11.bean.Info_Grid;
+import bgs.com.jianbao11.bean.Info_shouyel;
 import bgs.com.jianbao11.view.PullToRefrushView;
 import bgs.com.jianbao11.view.View_Advers;
 
@@ -38,7 +38,7 @@ public class Fragment_Home extends Fragment implements PullToRefrushView.Pull_To
     private View centerLinear;
     private LinearLayout myViewPager;
     private View_Advers viewAdvers;
-    private List<Info_Bean> list=new ArrayList<Info_Bean>();
+    private List<Info_shouyel> list=new ArrayList<Info_shouyel>();
     private List<Info_Grid> infoGrid_List =new ArrayList<Info_Grid>();
     private List<Info_Adver> infoAdverList =new ArrayList<Info_Adver>();
     private ListView mFrag_home_lv;
@@ -61,12 +61,12 @@ public class Fragment_Home extends Fragment implements PullToRefrushView.Pull_To
 
     private void initList() {
         for (int i=0;i<7;i++){
-            Info_Bean infoBean =new Info_Bean("标题"+i,""+169,""+i,"http://p4.so.qhmsg.com/sdr/574_768_/t0196e715f3442552a4.jpg","2016.11."+i,"2016.12."+i,i+"");
-            list.add(infoBean);
+            Info_shouyel info_shouyel=new Info_shouyel("佛挡杀佛","56","http://p4.so.qhmsg.com/sdr/574_768_/t0196e715f3442552a4.jpg",2,"http://p4.so.qhmsg.com/sdr/574_768_/t0196e715f3442552a4.jpg");
+            list.add(info_shouyel);
         }
         //gridview
         for (int i=0;i<5;i++){
-            Info_Grid infoGrid_ =new Info_Grid("商品名称"+i,"http://p4.so.qhmsg.com/sdr/574_768_/t0196e715f3442552a4.jpg","180");
+            Info_Grid infoGrid_ =new Info_Grid("商品名称"+i,"http://p4.so.qhmsg.com/sdr/574_768_/t0196e715f3442552a4.jpg","180",3);
             infoGrid_List.add(infoGrid_);
         }
         //viewpager
@@ -96,7 +96,7 @@ public class Fragment_Home extends Fragment implements PullToRefrushView.Pull_To
         mFrag_home_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Info_Bean item = (Info_Bean) adapter_fragment.getItem(i);
+                Info_shouyel item = (Info_shouyel) adapter_fragment.getItem(i);
                 Intent intent=new Intent(getActivity(), Activity_GoodsDetail.class);
                 startActivity(intent);
             }
@@ -180,7 +180,7 @@ public class Fragment_Home extends Fragment implements PullToRefrushView.Pull_To
     private void LoadMore(){
         int count = adapter_grid.getCount();
         for (int i=count;i<count+11;i++){
-            Info_Grid infoGrid_ =new Info_Grid("商品名称"+i,"http://p4.so.qhmsg.com/sdr/574_768_/t0196e715f3442552a4.jpg","190");
+            Info_Grid infoGrid_ =new Info_Grid("商品名称"+i,"http://p4.so.qhmsg.com/sdr/574_768_/t0196e715f3442552a4.jpg","190",3);
             infoGrid_List.add(infoGrid_);
         }
     }

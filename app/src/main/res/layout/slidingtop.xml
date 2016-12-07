@@ -5,16 +5,17 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="46dp"
         android:layout_alignParentBottom="true"
-        android:background="#FFDAB9">
+        android:background="#E6E6FA">
     </LinearLayout>
     <LinearLayout
         android:id="@+id/mL"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#00000000">
         <LinearLayout
             android:id="@+id/mFrag_home"
             android:layout_weight="1"
@@ -25,13 +26,13 @@
             <ImageView
                 android:id="@+id/mFrag_home1"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/main_board_1_active"/>
             <TextView
                 android:id="@+id/mFrag_home2"
                 android:layout_gravity="center_horizontal"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="首页"/>
@@ -46,14 +47,14 @@
             <ImageView
                 android:id="@+id/mFrag_want1"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/main_board_2"/>
             <TextView
                 android:id="@+id/mFrag_want2"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:layout_height="wrap_content"
                 android:text="求购"/>
         </LinearLayout>
@@ -66,8 +67,8 @@
             <ImageView
                 android:id="@+id/mFrag_push"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/main_board_center_plus"/>
         </LinearLayout>
         <LinearLayout
@@ -80,14 +81,14 @@
             <ImageView
                 android:id="@+id/mFrag_collection1"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/main_board_3"/>
             <TextView
                 android:id="@+id/mFrag_collection2"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:layout_height="wrap_content"
                 android:text="收藏"/>
         </LinearLayout>
@@ -101,14 +102,14 @@
             <ImageView
                 android:id="@+id/mFrag_mine1"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/main_board_4"/>
             <TextView
                 android:id="@+id/mFrag_mine2"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:layout_height="wrap_content"
                 android:text="我的"/>
         </LinearLayout>

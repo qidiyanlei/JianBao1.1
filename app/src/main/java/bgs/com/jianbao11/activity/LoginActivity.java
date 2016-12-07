@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import bgs.com.jianbao11.R;
+import bgs.com.jianbao11.jianbao.MyAppalication;
+import bgs.com.jianbao11.utils.SharedUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import okhttp3.Call;
@@ -49,15 +52,17 @@ public class LoginActivity extends Activity {
     TextView _signupLink;
     private String url = "http://192.168.4.188/Goods/app/common/login.json";
     private Map map = new HashMap();
-    private boolean valid;
+
     private boolean valid1;
+    private SharedUtils utils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-
+        getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        utils = ((MyAppalication)LoginActivity.this.getApplicationContext()).utils;
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -133,6 +138,12 @@ public class LoginActivity extends Activity {
                                 });
                             } else {
                                 login();
+                                Log.e("111111", response.message() + " , body " + str);
+                                JSONObject object = new JSONObject(str);
+                                String token = object.getString("token");
+                                utils.saveShared("token",token,LoginActivity.this);
+                                String token1 = utils.getShared("token", LoginActivity.this);
+                                Log.e("token",token1);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -148,6 +159,11 @@ public class LoginActivity extends Activity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+    }
     public void login() {
         Log.d(TAG, "Login");
 
@@ -177,7 +193,7 @@ public class LoginActivity extends Activity {
                             // onLoginFailed();
                             progressDialog.dismiss();
                         }
-                    }, 3000);
+                    },2000);
         }
     });
 
@@ -207,6 +223,7 @@ public class LoginActivity extends Activity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         finish();
+        startActivity(new Intent(LoginActivity.this,MainActivity.class));
     }
 
     public void onLoginFailed() {

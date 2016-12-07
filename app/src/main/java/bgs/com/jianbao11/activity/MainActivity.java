@@ -1,11 +1,11 @@
 package bgs.com.jianbao11.activity;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,8 +18,10 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import bgs.com.jianbao11.R;
 import bgs.com.jianbao11.fragment.Fragment_Collection;
 import bgs.com.jianbao11.fragment.Fragment_Home;
-import bgs.com.jianbao11.fragment.MineFragment;
 import bgs.com.jianbao11.fragment.Fragment_Want;
+import bgs.com.jianbao11.fragment.MineFragment;
+import bgs.com.jianbao11.jianbao.MyAppalication;
+import bgs.com.jianbao11.utils.SharedUtils;
 
 
 /**
@@ -35,10 +37,13 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
     private MineFragment mineFragment;
     private FragmentManager manager;
     private boolean isExit;
+    private SharedUtils utils;
+    private String url = "http://192.168.4.188/Goods/app/user/info.json";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         manager=getSupportFragmentManager();
+        utils = ((MyAppalication)MainActivity.this.getApplicationContext()).utils;
         //抽屉初始化
         SlidingMenu sm = getSlidingMenu();
         sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
@@ -179,12 +184,22 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
                 cleanFrag();
                 mFrag_mine1.setImageResource(R.drawable.main_board_4_active);
                 mFrag_mine2.setTextColor(Color.RED);
-                if (mineFragment==null){
-                    mineFragment=new MineFragment();
-                    transaction.add(R.id.mLinear_frag,mineFragment);
-                }else{
-                    transaction.show(mineFragment);
-                }
+                   /*JSONObject object = new JSONObject(url);
+                    String token1 = object.getString("token");*/
+                    String token = utils.getShared("token", this);
+                    if (token == null || "".equals(token)) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        if (mineFragment==null){
+                            mineFragment=new MineFragment();
+                            transaction.add(R.id.mLinear_frag,mineFragment);
+                        }else{
+                            transaction.show(mineFragment);
+                        }
+                    }
+
                 break;
         }
         transaction.commit();

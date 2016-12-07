@@ -8,11 +8,13 @@ public class Info_Grid {
     private String title;
     private String img_url;
     private String price;
+    private int tag;
 
-    public Info_Grid(String title, String img_url, String price) {
+    public Info_Grid(String title, String img_url, String price, int tag) {
         this.title = title;
         this.img_url = img_url;
         this.price = price;
+        this.tag = tag;
     }
 
     public String getTitle() {
@@ -37,5 +39,13 @@ public class Info_Grid {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public int getTag() {
+        return tag;
+    }
+
+    public void setTag(int tag) {
+        this.tag = tag;
     }
 }

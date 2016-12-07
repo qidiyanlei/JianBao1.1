@@ -2,30 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECECEC"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       >
+        android:layout_margin="10dp">
 
         <TextView
-            android:id="@+id/abolish_tv"
+            android:id="@+id/cancel_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="取消"
-            android:textSize="18sp"
-            android:layout_marginLeft="12dp"
             android:textColor="#000"
-            />
+            android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/Selling_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="发布商品"
-            android:textSize="25dp"
-            android:textColor="#000"/>
+            android:textColor="#000"
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/abolish"
@@ -36,80 +36,237 @@
             android:textColor="#000"
             android:textSize="18sp" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#dee2df"
-        android:layout_marginTop="8dp"
-        />
+        android:layout_marginTop="3dp"
+        android:background="#dee2df" />
 
     <LinearLayout
-        android:id="@+id/phto_lin"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:orientation="vertical"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/public_product_camera_touch"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/gridView1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:background="#EFDFDF"
+            android:columnWidth="90dp"
+            android:gravity="center"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp"></GridView>
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="拍个照把"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:textSize="18sp"
-            />
+            android:gravity="center"
+            android:text="(友情提示:只能添加4张图片,长按图片可以删除已添加图片)" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#dee2df"
-        android:layout_marginTop="8dp"
-        />
+        android:layout_marginTop="2dp"
+        android:background="#dee2df" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp">
+
         <TextView
             android:id="@+id/title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="标题"
-            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="13dp"
+            android:text="标\t\t题\t\t\t"
             android:textColor="#000"
-            />
+            android:textSize="18sp" />
+
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="最多40字"
+            android:id="@+id/title_edtv"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:layout_alignLeft="@+id/title_tv"
             android:layout_alignParentRight="true"
-            android:textSize="16sp"
-            />
+            android:layout_marginRight="5dp"
+            android:background="#fff"
+            android:hint="\t最多40字"
+            android:maxLength="40"
+            android:textSize="16sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/editview_shape"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/content_edtv"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_weight="0.20"
+            android:background="#fff"
+            android:hint="\t\t描述一下您的宝贝..."
+            android:maxLength="200"
+            android:singleLine="false"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+
+            >
+
+            <ImageView
+                android:id="@+id/mImg_bargain"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/publish_bargin_inactive" />
+
+            <ImageView
+                android:id="@+id/mImg_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/publish_type_inactive" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#dee2df"
         android:layout_marginTop="8dp"
-        />
+        android:background="#dee2df" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#ECECEC">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="13dp"
+                android:text="价 \t\t\t 格\t\t"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/price_edtv"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="#fff"
+                android:hint="请输入你要卖出的价格" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="1dp"
+            android:background="#dee2df" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#ECECEC">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="13dp"
+                android:text="联系电话\t"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/phone_edtv"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="#fff"
+                android:hint="请输入你的联系方式" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="1dp"
+            android:background="#dee2df" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="#ECECEC">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="13dp"
+                android:text="Q\t\t\t\tQ\t\t\t"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/qq_edtv"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="#fff"
+                android:hint="请输入QQ联系方式" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="1dp"
+            android:background="#dee2df" />
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
-        <EditText
-            android:id="@+id/appraise_dtv"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/publish_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="描述一下您的宝贝"
-            android:layout_marginLeft="13dp"
-            />
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="#FF1122"
+            android:text="确定发布"
+            android:textColor="#fff" />
 
     </RelativeLayout>
 </LinearLayout>
+

@@ -5,35 +5,10 @@
     android:background="#F6F6F6"
     android:orientation="vertical"
     >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#FFFFFF"
-
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="头像"
-            android:layout_marginLeft="20dp"
-            android:textSize="18sp"
-            android:layout_centerVertical="true"
-            />
-        <ImageView
-            android:id="@+id/mImg_xinxi_head"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
         android:layout_marginTop="2dp"
         >
@@ -59,20 +34,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
         android:layout_marginTop="2dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="邀请码"
+            android:text="性别"
             android:layout_marginLeft="20dp"
             android:textSize="18sp"
             android:layout_centerVertical="true"
             />
         <TextView
-            android:id="@+id/mTv_xinxi_code"
+            android:id="@+id/mTv_xinxi_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2231231"
@@ -84,7 +59,7 @@
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:layout_marginLeft="20dp"
         >
@@ -97,7 +72,7 @@
     </LinearLayout>
     <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="50dp"
     android:background="#FFFFFF"
     android:layout_marginTop="2dp"
     >
@@ -119,10 +94,10 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
         />
-</RelativeLayout>
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
         android:layout_marginTop="2dp"
         >
@@ -147,7 +122,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
         android:layout_marginTop="2dp"
         >
@@ -172,7 +147,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
         android:layout_marginTop="2dp"
         >
@@ -194,5 +169,83 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             />
+
+
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:layout_marginTop="2dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邀请码"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:id="@+id/mTv_xinxi_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2231231"
+            android:textSize="16sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            />
+
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:id="@+id/mTv_isCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询邀请码是否可用"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        />
+
+        <TextView
+            android:background="#FFFFFF"
+            android:id="@+id/mTv_exit"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="退出登陆"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_marginBottom="20dp"
+        >
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最后登陆时间"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:id="@+id/mTv_lasttime"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+
+            android:text="132123123213"
+            android:layout_marginRight="20dp"
+            />
+
+    </LinearLayout>
+
 </LinearLayout>

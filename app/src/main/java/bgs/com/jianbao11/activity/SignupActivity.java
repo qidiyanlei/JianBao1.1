@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 import bgs.com.jianbao11.R;
 import bgs.com.jianbao11.picture.ImageTools;
+import bgs.com.jianbao11.utils.RoundBitmapUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -60,10 +63,17 @@ import static java.lang.String.valueOf;
 
 public class SignupActivity extends Activity {
     private static final String TAG = "SignupActivity";
-    private ProgressDialog progressDialog;
+
     private static final int TAKE_PICTURE = 0;
     private static final int CHOOSE_PICTURE = 1;
+
     private static final int SCALE = 5;//照片缩小比例
+    @InjectView(R.id.mTv_isCode)
+    TextView mTvIsCode;
+    @InjectView(R.id.mImg_idcard)
+    ImageView mImgIdcard;
+    private ProgressDialog progressDialog;
+
     @InjectView(R.id.mTil_QQ)
     TextInputLayout mTilQQ;
     @InjectView(R.id.mTil_wechat)
@@ -89,25 +99,25 @@ public class SignupActivity extends Activity {
     RadioButton mRbtnMan;
     @InjectView(R.id.mRbtn_woman)
     RadioButton mRbtnWoman;
-    @InjectView(mImg_idcard)
-    ImageView mImgIdcard;
     @InjectView(R.id.input_more)
     TextView inputMore;
     @InjectView(R.id.input_QQ)
     EditText inputQQ;
     @InjectView(R.id.input_wechat)
     EditText inputWechat;
-
     private String url = "http://192.168.4.188/Goods/app/common/register.json";
     private File file;
-    private Map map = new HashMap<String, String>();
+    private Map map = new HashMap<>();
+    private Map map1 = new HashMap<>();
     private boolean valid;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ButterKnife.inject(this);
+        Bitmap bitmap = RoundBitmapUtils.getBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.imgidcard));
+        mImgIdcard.setImageBitmap(bitmap);
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,9 +135,13 @@ public class SignupActivity extends Activity {
         });
     }
 
+    private void initMap() {
+        map1.put("code",inputcode.getText());
+    }
+
     private void initData() {
         validate();
-        if (!valid){
+        if (!valid) {
             Toast.makeText(this, "请检查您输入的信息", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -145,6 +159,7 @@ public class SignupActivity extends Activity {
         }
     }
 
+
     protected void post_file(final String url, final Map<String, Object> map, File file) {
 
         OkHttpClient client = new OkHttpClient();
@@ -157,7 +172,7 @@ public class SignupActivity extends Activity {
             // 参数分别为， 请求key ，文件名称 ， RequestBody
             requestBody.addFormDataPart("card", file.getName(), body);
         }
-        if (map != null&&!map.isEmpty()) {
+        if (map != null && !map.isEmpty()) {
             // map 里面是请求中所需要的 key 和 value
             for (Map.Entry entry : map.entrySet()) {
                 if (entry.getValue() != null && !"".equals(entry.getValue())) {
@@ -180,42 +195,41 @@ public class SignupActivity extends Activity {
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.code() == 200) {
                         String str = response.body().string();
-                        try {
-                            JSONObject jo= new JSONObject(str);
-                            String statusCode = (String) jo.get("status");
-                            if(!"200".equals(statusCode)){
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(SignupActivity.this, "邀请码无效", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                            else{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(SignupActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                                        signup();
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                _signupButton.setEnabled(false);
 
-                                                progressDialog = new ProgressDialog(SignupActivity.this,
-                                                        R.style.AppTheme_Dark_Dialog);
-                                                progressDialog.setIndeterminate(true);
-                                                progressDialog.setMessage("账号创建中...");
-                                                progressDialog.show();
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                            try {
+                                JSONObject jo = new JSONObject(str);
+                                String statusCode = (String) jo.get("status");
+                                if (!"200".equals(statusCode)) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(SignupActivity.this, "填写信息有误", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(SignupActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                            signup();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    _signupButton.setEnabled(false);
 
+                                                    progressDialog = new ProgressDialog(SignupActivity.this,
+                                                            R.style.AppTheme_Dark_Dialog);
+                                                    progressDialog.setIndeterminate(true);
+                                                    progressDialog.setMessage("账号创建中...");
+                                                    progressDialog.show();
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                     } else {
                         runOnUiThread(new Runnable() {
                             @Override
@@ -275,7 +289,7 @@ public class SignupActivity extends Activity {
                 String phone = inputPhone.getText().toString().trim();
 
 
-                if (code==null||"".equals(code)) {
+                if (code == null || "".equals(code)) {
                     inputcode.setError("输入的邀请码有误");
                     valid = false;
                 } else {
@@ -311,7 +325,7 @@ public class SignupActivity extends Activity {
      * 验证手机格式
      */
     public static boolean isMobileNO(String mobiles) {
-		/*
+        /*
 		移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
 		联通：130、131、132、152、155、156、185、186
 		电信：133、153、180、189、（1349卫通）
@@ -327,7 +341,7 @@ public class SignupActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case mImg_idcard:
-                showPicturePicker(this);
+                showPicturePicker(SignupActivity.this);
                 break;
             case R.id.input_more:
                 if (!isMore) {
@@ -344,6 +358,8 @@ public class SignupActivity extends Activity {
                 break;
         }
     }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -357,8 +373,9 @@ public class SignupActivity extends Activity {
                     bitmap.recycle();
                     //将处理过的图片显示在界面上，并保存到本地
                     mImgIdcard.setImageBitmap(newBitmap);
-                    ImageTools.savePhotoToSDCard(newBitmap, Environment.getExternalStorageDirectory().getAbsolutePath(), valueOf(System.currentTimeMillis()));
+                    ImageTools.savePhotoToSDCard(newBitmap, Environment.getExternalStorageDirectory().getAbsolutePath(), String.valueOf(System.currentTimeMillis()));
                     break;
+
                 case CHOOSE_PICTURE:
                     ContentResolver resolver = getContentResolver();
                     //照片的原始资源地址
@@ -372,15 +389,18 @@ public class SignupActivity extends Activity {
                             //释放原始图片占用的内存，防止out of memory异常发生
                             photo.recycle();
                             mImgIdcard.setImageBitmap(smallBitmap);
-                            String[] proj = {MediaStore.Images.Media.DATA};
-                            //以下是拿到选择图片的路径
-                            Cursor cursor = managedQuery(originalUri, proj, null, null, null);
-                            //按我个人理解 这个是获得用户选择的图片的索引值
-                            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                            //将光标移至开头 ，这个很重要，不小心很容易引起越界
-                            cursor.moveToFirst();
-                            //最后根据索引值获取图片路径
-                            String path = cursor.getString(column_index);
+                            String path = "";
+                            int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
+                            if (sdkVersion > 19) {
+                                path = originalUri.getPath();//5.0直接返回的是图片路径，5.0以下是一个和数据库有关的索引值
+                            } else {
+                                String[] proj = {MediaStore.Images.Media.DATA};
+                                Cursor cursor = getApplicationContext().getContentResolver().query(originalUri,
+                                        proj, null, null, null);
+                                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                                cursor.moveToFirst();
+                                path = cursor.getString(column_index);
+                            }
                             file = new File(path);
                         }
                     } catch (FileNotFoundException e) {
@@ -389,11 +409,13 @@ public class SignupActivity extends Activity {
                         e.printStackTrace();
                     }
                     break;
+
                 default:
                     break;
             }
         }
     }
+
     public void showPicturePicker(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("图片来源");
@@ -410,11 +432,13 @@ public class SignupActivity extends Activity {
                         openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                         startActivityForResult(openCameraIntent, TAKE_PICTURE);
                         break;
+
                     case CHOOSE_PICTURE:
                         Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
                         openAlbumIntent.setType("image/*");
                         startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
                         break;
+
                     default:
                         break;
                 }
@@ -422,4 +446,5 @@ public class SignupActivity extends Activity {
         });
         builder.create().show();
     }
+
 }
